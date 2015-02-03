@@ -1,0 +1,158 @@
+<div class="col-sm-8 col-md-9">
+          <div class="page-header page-header-bleed-right">
+            <div class="actions pull-right">
+              <a ng-click="getMeasurement()" ng-href="#/measurement"><span class="pficon pficon-refresh"></span> Refresh Results</a>
+            </div>
+            <h1>Measurement</h1>
+          </div>
+          <h2 class="h4">Infrastructure Measurement</h2>
+
+          <div class="form-group">
+            <div class="">
+              <input ng-keyup="getMeasurement(queryParam)" class="form-control" type="text" ng-model="queryParam" placeholder="Type here to filter the list...">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <table id="asset_list" class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>DATE</th>
+                  <th>ASSET</th>
+                  <th>TEMP / PRESSURE</th>
+                  <th>LAT / LONG</th>
+                  <th>IP ADDRESS</th>
+                  <th ng-hide="!jsonshow">JSON</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="m in measurement.list">
+                  <td>
+                    {{ m.id }}
+                  </td>
+                  <td>
+                    {{ m.date | date:'yyyy-MM-dd HH:mm:ss' }}
+                  </td>
+                  <td>
+                    <a ng-href="#/asset/{{ m.asset }}">{{ m.asset }}</a>
+                  </td>
+                  <td>
+                    {{ m.temp }} / {{ m.pressure }}
+                  </td>
+                  <td>
+                    {{ m.latitude }} / {{ m.longitude }}
+                  </td>
+                  <td>
+                    {{ m.ip_address }}
+                  </td>
+                  <td ng-hide="!jsonshow">
+                    <pre>{{ m | json }}</pre>
+                  </td>
+                </tr>
+                <tr ng-hide="measurement.list.length">
+                  <td>
+                    <p class="text-center">No Data Found</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row text-center">
+              <pagination ng-change="pageChanged()" boundary-links="true"
+              total-items="measurement.totalResults" max-size="10"
+              ng-model="measurement.currentPage" class="pagination-sm"
+              items-per-page="measurement.pageSize" previous-text="&lsaquo;"
+              next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+              </pagination>
+            </div>
+          </div>
+          <hr>
+          <h2 class="h4">Resource Usage</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <img src="https://www.patternfly.org/wp-content/uploads/patternfly/tests/img/dashboard-2.png" alt="Placeholder graph" class="img-responsive">
+            </div>
+            <div class="col-sm-6">
+              <img src="https://www.patternfly.org/wp-content/uploads/patternfly/tests/img/dashboard-3.png" alt="Placeholder graph" class="img-responsive">
+            </div>
+          </div>
+          <hr>
+          <h2 class="h4">Infrastructure Capacity</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <img src="https://www.patternfly.org/wp-content/uploads/patternfly/tests/img/dashboard-4.png" alt="Placeholder graph" class="img-responsive">
+            </div>
+            <div class="col-sm-6">
+              <table class="table">
+                <tbody><tr>
+                  <th>Status</th>
+                  <th>Location Data</th>
+                  <th>Hosts</th>
+                </tr>
+                <tr>
+                  <td><span class="label label-success">New</span></td>
+                  <td><strong>Fusce leo massa</strong><br>Created March 05, 2014 08:34:36 AM</td>
+                  <td><span class="label label-default">11</span></td>
+                </tr>
+                <tr>
+                  <td><span class="label label-success">New</span></td>
+                  <td><strong>Iaculis at dapibus eget</strong><br>Created March 03, 2014 20:32:12 AM</td>
+                  <td><span class="label label-default">9</span></td>
+                </tr>
+                <tr>
+                  <td><span class="label label-default">Disabled</span></td>
+                  <td><strong>Dapibus nec metus</strong><br>Created March 03, 2014 19:11:56 AM</td>
+                  <td><span class="label label-default">25</span></td>
+                </tr>
+              </tbody></table>
+              <p><a href="#">See more »</a></p>
+            </div>
+          </div>
+        </div>
+<div class="col-sm-4 col-md-3 sidebar-pf sidebar-pf-right" style="min-height: 1069px;">
+          <div class="sidebar-header sidebar-header-bleed-left sidebar-header-bleed-right">
+            <div class="actions pull-right">
+              <a href="#">Clear Messages</a>
+            </div>
+            <h2 class="h5">Latest Notifications</h2>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item active">
+              <h3 class="list-group-item-heading">Duis eu augue lectus</h3>
+              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
+            </li>
+            <li class="list-group-item">
+              <h3 class="list-group-item-heading">Donec dictum odio eu turpis rutrum</h3>
+              <p class="list-group-item-text">Etiam sit amet ultricies ligula.</p>
+            </li>
+            <li class="list-group-item">
+              <h3 class="list-group-item-heading">At egestas nibh dictum</h3>
+              <p class="list-group-item-text">Maecenas vitae tempus mauris.</p>
+            </li>
+            <li class="list-group-item active">
+              <h3 class="list-group-item-heading">Phasellus dictum posuere ante sit</h3>
+              <p class="list-group-item-text">Pellentesque rutrum justo in congue tristique.</p>
+            </li>
+            <li class="list-group-item">
+              <h3 class="list-group-item-heading">Amet commodo</h3>
+              <p class="list-group-item-text">Pellentesque in leo elit.</p>
+            </li>
+            <li class="list-group-item">
+              <h3 class="list-group-item-heading">Nunc viverra purus libero</h3>
+              <p class="list-group-item-text">Nulla lacinia lorem quis enim posuere dictum.</p>
+            </li>
+            <li class="list-group-item active">
+              <h3 class="list-group-item-heading">Non faucibus augue dapibus at</h3>
+              <p class="list-group-item-text">Fusce id rutrum ante, eget vestibulum dolor</p>
+            </li>
+            <li class="list-group-item">
+              <h3 class="list-group-item-heading">Vivamus at semper</h3>
+              <p class="list-group-item-text">Duis sagittis vitae neque at vehicula.</p>
+            </li>
+            <li class="list-group-item">
+              <h3 class="list-group-item-heading">Sed sit amet dolor</h3>
+              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
+            </li>
+          </ul>
+          <p><a href="#">See all messages</a></p>
+        </div>

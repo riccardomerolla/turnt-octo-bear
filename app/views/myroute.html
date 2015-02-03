@@ -1,0 +1,61 @@
+<div>
+  <ol class="breadcrumb">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/">Test List</a></li>
+    <li>{{item.id.code}}</li>
+  </ol>
+  <form id="UpdateTestForm" name="UpdateTestForm" class="form-horizontal" role="form"
+              ng-submit="update()">
+
+            <legend class="sm-col-12">Test Detail</legend>
+
+            <div class="form-group">
+                <label id="lbl_key" for="code" class="col-sm-4 control-label">Code</label>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="code" id="code" placeholder=""
+                           ng-model="item.id.code" required>
+                    <span ng-show="submitted && UpdateTestForm.key.$invalid">
+                      Key required
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label id="lbl_partitionKey" for="partitionKey" class="col-sm-4 control-label">Partiton</label>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="partitionKey" id="partitionKey" placeholder=""
+                           ng-model="item.id.partitionKey">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label id="lbl_value" for="value" class="col-sm-4 control-label">Value</label>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="value" id="value" placeholder=""
+                           ng-model="item.value">
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- pre>{{ matrix | json }}</pre -->
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8 text-right">
+                    <a ng-href="#/" id="btn_back" class="btn btn-warning">Back</a>
+
+                    <button type="submit" class="btn btn-success" id="btn_create">Save</button>
+                </div>
+            </div>
+
+            <div ng-repeat="alert in alerts">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <strong>Warning!</strong> {{alert.msg}}
+                </div>
+            </div>
+
+        </form>

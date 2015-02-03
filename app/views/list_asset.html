@@ -1,0 +1,138 @@
+<div class="col-sm-8 col-md-9">
+  <ol class="breadcrumb">
+    <li><a href="#/">Home</a>
+    </li>
+    <li>Asset List</li>
+  </ol>
+  <h1>Asset List</h1>
+
+  <form class="form-horizontal">
+
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-6">
+        <input ng-keyup="getAsset(queryParam)" class="form-control" type="text" ng-model="queryParam" placeholder="Type here to filter the list...">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-md-offset-1 col-md-8">
+        <a ng-click="getAsset()" ng-href="#/asset"><span class="pficon pficon-refresh pull-left"></span> Refresh Results</a>
+        <a ng-href="#/asset/detail" class="btn btn-primary pull-right" id="btn_asset_create">
+          <span class="glyphicon glyphicon-plus"></span> Add Asset</a>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-1 col-md-8">
+        <table id="asset_list" class="table table-striped">
+          <thead>
+            <tr>
+              <th></th>
+              <th>CODE</th>
+              <th>DESCRIPTION</th>
+              <th ng-hide="!jsonshow">JSON</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="a in asset.list | filter: search">
+              <td>
+                <a ng-href="#/asset/{{a.id}}" class="btn btn-primary" id="btn_asset_detail">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+              </td>
+              <td>
+                {{ a.code }}
+              </td>
+              <td>
+                {{ a.description }}
+              </td>
+              <td ng-hide="!jsonshow">
+                <pre>{{ a | json }}</pre>
+              </td>
+            </tr>
+            <tr ng-hide="asset.list.length">
+              <td>
+                <p class="text-center">No Data Found</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row text-center">
+          <pagination ng-change="pageChanged()" boundary-links="true" total-items="asset.totalResults" ng-model="asset.currentPage" class="pagination-sm" items-per-page="asset.pageSize" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+          </pagination>
+        </div>
+      </div>
+
+  </form>
+  <div class="form-horizontal">
+  <div class="form-group">
+    <label id="lbl_key" class="col-sm-4 control-label">Selected:
+      <a ng-href="#/asset/{{asset.selected.id}}">{{asset.selected.code}}</a>
+    </label>
+    <div class="col-md-6">
+      <ui-select ng-model="asset.selected" theme="bootstrap" ng-disabled="disabled" reset-search-input="false" style="width: 300px;">
+        <ui-select-match placeholder="Enter...">{{$select.selected.description}}</ui-select-match>
+        <ui-select-choices repeat="a in asset.list | filter: $select.search">
+          <div ng-bind-html="a.description | highlight: $select.search"></div>
+          <small ng-bind-html="a.code | highlight: $select.search"></small>
+        </ui-select-choices>
+      </ui-select>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <form id="UpdateAssetForm" name="UpdateAssetForm" class="form-horizontal" role="form" ng-submit="update()" ng-hide="!asset.selected">
+
+      <legend class="sm-col-9">Asset Detail</legend>
+
+      <div class="form-group">
+        <label id="lbl_key" for="code" class="col-sm-4 control-label">Code</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" name="code" id="code" placeholder="" ng-model="asset.selected.code" required>
+          <span ng-show="submitted && UpdateTestForm.key.$invalid">
+            Key required
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label id="lbl_description" for="description" class="col-sm-4 control-label">Description</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" name="description" id="description" placeholder="" ng-model="asset.selected.description">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8 text-right">
+          <a ng-href="#/asset" id="btn_back" class="btn btn-warning">Back</a>
+
+          <button type="submit" class="btn btn-success" id="btn_create">Save</button>
+        </div>
+      </div>
+
+      <div ng-repeat="alert in alerts">
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <strong>Warning!</strong> {{alert.msg}}
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textInput">Show JSON: </label>
+    <div class="col-md-6">
+      <input type="checkbox" id="textInput" ng-model="jsonshow">
+    </div>
+  </div>
+  <hr ng-hide="!jsonshow">
+  <pre ng-hide="!jsonshow">{{ asset.list | json }}</pre>
+  </div>
