@@ -9,5 +9,5 @@
  */
 angular.module('myNewProjectApp')
   .factory('matrixFactory', function ($resource) {
-  return $resource("http://localhost:8080/six/rest/matrix/:id");
+  return $resource("http://docker.ict-group.it:28080/six/rest/matrix/:id");
 });

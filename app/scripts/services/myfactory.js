@@ -9,7 +9,7 @@
  */
 angular.module('myNewProjectApp')
   .factory('myFactory', function ($resource) {
-    return $resource("http://localhost:8080/six/rest/partition-map/:partition/:code");
+    return $resource("http://docker.ict-group.it:28080/six/rest/partition-map/:partition/:code");
     // Service logic
     // ...
 
