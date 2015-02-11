@@ -18,7 +18,7 @@ angular.module('myNewProjectApp')
       } else {
         $scope.measurement = measurementFactory.query();
       }
-  }
+  };
 
   $scope.getMeasurement = function (query) {
       $log.info("Query");
@@ -35,13 +35,13 @@ angular.module('myNewProjectApp')
     measurementFactory.save($scope.measurement.selected);
     $scope.getMeasurement();
     $location.path("/measurement");
-  }
+  };
 
   $scope.delete = function (idToDelete) {
     measurementFactory.delete({id: idToDelete});
     $scope.getMeasurement();
     $location.path("/measurement");
-  }
+  };
 
   $scope.getMeasurement();
 });

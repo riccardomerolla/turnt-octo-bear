@@ -2,18 +2,18 @@
 
 /**
  * @ngdoc service
- * @name myNewProjectApp.measurementFactory
+ * @name myNewProjectApp.maintenanceFactory
  * @description
- * # measurementFactory
+ * # maintenanceFactory
  * Factory in the myNewProjectApp.
  */
 angular.module('myNewProjectApp')
-  .factory('measurementFactory', function (APP_URL, $resource) {
-    return $resource(APP_URL + '/resources/measurement/:id', {}, {
+  .factory('maintenanceFactory', function (APP_URL, $resource) {
+    return $resource(APP_URL + '/resources/maintenance/:id', {}, {
         query: { method: 'GET', isArray: false },
         create: { method: 'POST' },
         show: { method: 'GET' },
         update: { method: 'PUT', params: {id: '@id'} },
         delete: { method: 'DELETE', params: {id: '@id'} }
     });
-  });
+});

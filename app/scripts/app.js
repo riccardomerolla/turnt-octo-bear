@@ -21,6 +21,7 @@ angular
     'ui.bootstrap',
     'ui.select'
   ])
+  .constant("APP_URL", "http://localhost:8080/headlands")
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
